@@ -1,0 +1,72 @@
+{
+    "services": [{
+            "name": "PV",
+            "price_range": [300, 25000],
+            "intres": {
+                "300-25000": "7.90%"
+            },
+            "contract_fee": [50],
+            "monthly_fee": [1],
+            "period": [120],
+            "default_value": 5000,
+            "default_period": 60
+        },
+        {
+            "name": "Soojuspumbad",
+            "price_range": [300, 25000],
+            "intres": {
+                "300-1999": "7.90%",
+                "2000-5999": "6.50%",
+                "6000-25000": "5.90%"
+            },
+            "contract_fee": [30, 20, 20],
+            "monthly_fee": [1, 1, 1],
+            "period": [72, 72, 120],
+            "default_value": 1000,
+            "default_period": 48
+        },
+        {
+            "name": "Elektriauotode laadijad",
+            "price_range": [300, 25000],
+            "intres": {
+                "300-1999": "5.90%",
+                "2000-5999": "4.50%",
+                "6000-25000": "3.90%"
+            },
+            "contract_fee": [50, 40, 30],
+            "monthly_fee": [2, 2, 2],
+            "period": [72, 72, 120],
+            "default_value": 1000,
+            "default_period": 48
+        },
+        {
+            "name": "Võrguvaba elektrijaam Off-grid",
+            "price_range": [300, 25000],
+            "intres": {
+                "300-1999": "7.90%",
+                "2000-5999": "6.50%",
+                "6000-25000": "5.90%"
+            },
+            "contract_fee": [30, 20, 20],
+            "monthly_fee": [0, 0, 0],
+            "period": [72, 72, 120],
+            "default_value": 5000,
+            "default_period": 60
+        },
+        {
+            "name": "Elektri- ja gaasitööd",
+            "price_range": [300, 25000],
+            "intres": {
+                "300-999": "9.90%",
+                "1000-1999": "8.90%",
+                "2000-5999": "7.50%",
+                "6000-25000": "6.90%"
+            },
+            "contract_fee": [30, 20, 20, 20],
+            "monthly_fee": [1, 1, 0, 0],
+            "period": [72, 72, 72, 120],
+            "default_value": 1000,
+            "default_period": 48
+        }
+    ]
+}
