@@ -12,6 +12,15 @@ body {
     background-color: $light-blue;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 50px 0px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -23,6 +32,7 @@ input[type="number"] {
 }
 
 .calculator {
+    margin: auto;
     h1 {
         font-weight: 400;
     }
@@ -224,12 +234,6 @@ input[type="number"] {
     h3 {
         color: $green;
         padding: 5px;
-    }
-}
-
-@media only screen and (max-width: 1440px) {
-    .calculator {
-        margin: 50px 0px;
     }
 }
 
