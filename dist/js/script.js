@@ -71,7 +71,15 @@ async function getResponse() {
                   slider_value.value = num;
                 } else {
                   slider_value.value = manualSum;
-                  slider.value = manualSum;
+
+                  if (
+                    slider_value.value > content[volume][key].price_range[1]
+                  ) {
+                    manualSum = content[volume][key].price_range[1];
+                    slider_value.value = manualSum;
+                  } else {
+                    slider.value = manualSum;
+                  }
                 }
 
                 let low = range.split("-")[0];
@@ -167,6 +175,21 @@ async function getResponse() {
 
             period_select.value = content[volume][key].default_period + " kuud";
 
+            function valueFunc() {
+              instalment_sum = Number(instalment.value);
+              if (instalment_sum > slider.value) {
+                instalment_sum = 0;
+                instalment.style.borderBottom = "3px solid #e03416";
+                instalment.value = 0;
+              } else {
+                instalment.style.borderBottom = "3px solid #99a0a6";
+              }
+            }
+
+            function manualFunc() {
+              manualSum = slider_value.value;
+            }
+
             period_select.addEventListener("input", function () {
               contract_period.innerHTML = period_select.value;
               period = Number(period_select.value.split("kuud")[0]);
@@ -179,20 +202,26 @@ async function getResponse() {
             });
 
             instalment.addEventListener("focusout", function () {
-              instalment_sum = Number(instalment.value);
-              if (instalment_sum > slider.value) {
-                instalment_sum = 0;
-                instalment.style.borderBottom = "3px solid #e03416";
-                instalment.value = 0;
-              } else {
-                instalment.style.borderBottom = "3px solid #99a0a6";
-              }
+              valuefunc();
               sliderFunc();
+            });
+            instalment.addEventListener("keypress", function (e) {
+              if (e.keyCode === 13) {
+                valueFunc();
+                sliderFunc();
+              }
             });
 
             slider_value.addEventListener("focusout", function () {
-              manualSum = slider_value.value;
+              manualFunc();
               sliderFunc();
+            });
+
+            slider_value.addEventListener("keypress", function (e) {
+              if (e.keyCode === 13) {
+                manualFunc();
+                sliderFunc();
+              }
             });
           }
         }

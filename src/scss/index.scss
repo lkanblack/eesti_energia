@@ -149,6 +149,7 @@ input[type="number"] {
             outline: none;
             color: $green;
             font-weight: 600;
+            cursor: pointer;
         }
         &__value {
             position: absolute;
