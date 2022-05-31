@@ -14,6 +14,10 @@ let contract_total = document.querySelector(".contract-total");
 let period_select = document.querySelector("#period");
 let monthly_payment = document.querySelector(".monthly-payment");
 
+let btn = document.querySelector(".calculator__btn");
+let btn_close = document.querySelector(".close");
+let popup = document.querySelector(".popup");
+
 async function getResponse() {
   let response = await fetch("../data.json");
   let content = await response.json();
@@ -231,3 +235,11 @@ async function getResponse() {
 }
 
 getResponse();
+
+btn.addEventListener("click", function () {
+  popup.style.display = "block";
+});
+
+btn_close.addEventListener("click", function () {
+  popup.style.display = "none";
+});
