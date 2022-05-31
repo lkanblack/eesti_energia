@@ -19,7 +19,7 @@ let btn_close = document.querySelector(".close");
 let popup = document.querySelector(".popup");
 
 async function getResponse() {
-  let response = await fetch("../data.json");
+  let response = await fetch("data.json");
   let content = await response.json();
 
   for (let volume in content) {
