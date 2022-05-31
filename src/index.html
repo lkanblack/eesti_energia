@@ -22,7 +22,7 @@
                     </div>
                     <div class="input-item">
                         <label for="instalment">Sissemaks (eur) <span>*</span></label>
-                        <input type="text" name="instalment" id="instalment" placeholder="-" />
+                        <input type="number" name="instalment" id="instalment" placeholder="-" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57)) " />
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <span>Periood</span><span class="contract-period">0 kuud</span>
                 </div>
                 <div class="result-item">
-                    <span>Projekti maksumus</span><span>20 184 €</span>
+                    <span>Projekti maksumus</span><span class="contract-total">0 €</span>
                 </div>
                 <div class="result-item">
                     <span>Kuumakse</span><span class="monthly-payment">0.00 €</span>

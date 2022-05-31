@@ -6,9 +6,11 @@ let slider_min = document.querySelector(".calculator-slider__value--min");
 let slider_max = document.querySelector(".calculator-slider__value--max");
 let slider_value = document.querySelector(".slider-value");
 let intres_value = document.querySelector(".intres-value");
+let instalment = document.querySelector("#instalment");
 let contract_value = document.querySelector(".contract-value");
 let contract_free = document.querySelector(".contract-fee");
 let contract_period = document.querySelector(".contract-period");
+let contract_total = document.querySelector(".contract-total");
 let period_select = document.querySelector("#period");
 let monthly_payment = document.querySelector(".monthly-payment");
 
@@ -52,6 +54,10 @@ async function getResponse() {
             slider.value = content[volume][key].default_value;
             slider_value.innerHTML = content[volume][key].default_value;
 
+            contract_period.innerHTML =
+              content[volume][key].default_period + " kuud";
+
+            let period = 0;
             function sliderFunc() {
               let i = 0;
               for (let range in content[volume][key].intres) {
@@ -82,32 +88,58 @@ async function getResponse() {
                     let option = document.createElement("option");
                     option.innerHTML = j * 6 + " kuud";
                     period_select.append(option);
-                    period_select.value =
-                      content[volume][key].default_period + " kuud";
+                    if (period == 0) {
+                      period_select.value =
+                        content[volume][key].default_period + " kuud";
+                    } else {
+                      period_select.value = period + " kuud";
+                    }
                   }
-                  contract_period.innerHTML =
-                    content[volume][key].default_period + " kuud";
 
-                  let monthlyIntressedPay =
-                    ((slider.value *
-                      content[volume][key].intres[range].split("%")[0]) /
-                      100 +
-                      content[volume][key].default_value) /
-                    content[volume][key].default_period;
+                  let monthlyIntressedPay;
+                  let monhlyContractPay;
+                  let totalPayment;
+                  if (period == 0) {
+                    monthlyIntressedPay =
+                      ((Number(slider.value) *
+                        content[volume][key].intres[range].split("%")[0]) /
+                        100 +
+                        Number(slider.value)) /
+                      content[volume][key].default_period;
+                  } else {
+                    monthlyIntressedPay =
+                      ((Number(slider.value) *
+                        content[volume][key].intres[range].split("%")[0]) /
+                        100 +
+                        Number(slider.value)) /
+                      period;
+                  }
 
-                  let monhlyContractPay =
-                    content[volume][key].contract_fee[i - 1] /
-                    content[volume][key].default_period;
+                  if (period == 0) {
+                    monhlyContractPay =
+                      content[volume][key].contract_fee[i - 1] /
+                      content[volume][key].default_period;
+                  } else {
+                    monhlyContractPay =
+                      content[volume][key].contract_fee[i - 1] / period;
+                  }
 
                   let monthlyServciePay =
                     content[volume][key].monthly_fee[i - 1];
 
-                  let totalPayment =
-                    (slider.value *
-                      content[volume][key].intres[range].split("%")[0]) /
-                      100 +
-                    content[volume][key].default_value +
-                    content[volume][key].contract_fee[i - 1];
+                  if (period == 0) {
+                    totalPayment =
+                      (monthlyIntressedPay +
+                        monhlyContractPay +
+                        monthlyServciePay) *
+                      content[volume][key].default_period;
+                  } else {
+                    totalPayment =
+                      (monthlyIntressedPay +
+                        monhlyContractPay +
+                        monthlyServciePay) *
+                      period;
+                  }
 
                   monthly_payment.innerHTML =
                     (
@@ -116,14 +148,20 @@ async function getResponse() {
                       monthlyServciePay
                     ).toFixed(2) + " €";
 
-                  period_select.addEventListener("change", function () {
-                    contract_period.innerHTML = period_select.value;
-                  });
+                  contract_total.innerHTML = totalPayment.toFixed(2) + " €";
                 }
               }
             }
 
             sliderFunc();
+
+            period_select.value = content[volume][key].default_period + " kuud";
+
+            period_select.addEventListener("input", function () {
+              contract_period.innerHTML = period_select.value;
+              period = Number(period_select.value.split("kuud")[0]);
+              sliderFunc();
+            });
 
             slider.addEventListener("input", function () {
               sliderFunc();

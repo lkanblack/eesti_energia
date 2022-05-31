@@ -12,6 +12,16 @@ body {
     background-color: $light-blue;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .calculator {
     h1 {
         font-weight: 400;
