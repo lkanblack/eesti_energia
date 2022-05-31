@@ -10,7 +10,7 @@
             <div class="calculator-body__data">
                 <div class="calculator-slider">
                     <label for="volume">Summa:</label>
-                    <span class="slider-value"></span>
+                    <input class="slider-value" type="number" placeholder="-" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57)) " />
                     <span class="calculator-slider__value calculator-slider__value--min"></span>
                     <input type="range" id="volume" name="volume" />
                     <span class="calculator-slider__value calculator-slider__value--max"></span>

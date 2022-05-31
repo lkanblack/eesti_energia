@@ -52,19 +52,27 @@ async function getResponse() {
             slider_max.innerHTML = content[volume][key].price_range[1] + " €";
 
             slider.value = content[volume][key].default_value;
-            slider_value.innerHTML = content[volume][key].default_value;
+            slider_value.value = content[volume][key].default_value;
 
             contract_period.innerHTML =
               content[volume][key].default_period + " kuud";
 
             let period = 0;
+            let instalment_sum = 0;
+            let manualSum = 0;
+
             function sliderFunc() {
               let i = 0;
               for (let range in content[volume][key].intres) {
                 i++;
                 let num = Number(slider.value);
 
-                slider_value.innerHTML = num;
+                if (manualSum == 0) {
+                  slider_value.value = num;
+                } else {
+                  slider_value.value = manualSum;
+                  slider.value = manualSum;
+                }
 
                 let low = range.split("-")[0];
                 let high = range.split("-")[1];
@@ -104,14 +112,16 @@ async function getResponse() {
                       ((Number(slider.value) *
                         content[volume][key].intres[range].split("%")[0]) /
                         100 +
-                        Number(slider.value)) /
+                        Number(slider.value) -
+                        instalment_sum) /
                       content[volume][key].default_period;
                   } else {
                     monthlyIntressedPay =
                       ((Number(slider.value) *
                         content[volume][key].intres[range].split("%")[0]) /
                         100 +
-                        Number(slider.value)) /
+                        Number(slider.value) -
+                        instalment_sum) /
                       period;
                   }
 
@@ -164,6 +174,24 @@ async function getResponse() {
             });
 
             slider.addEventListener("input", function () {
+              manualSum = slider.value;
+              sliderFunc();
+            });
+
+            instalment.addEventListener("focusout", function () {
+              instalment_sum = Number(instalment.value);
+              if (instalment_sum > slider.value) {
+                instalment_sum = 0;
+                instalment.style.borderBottom = "3px solid #e03416";
+                instalment.value = 0;
+              } else {
+                instalment.style.borderBottom = "3px solid #99a0a6";
+              }
+              sliderFunc();
+            });
+
+            slider_value.addEventListener("focusout", function () {
+              manualSum = slider_value.value;
               sliderFunc();
             });
           }

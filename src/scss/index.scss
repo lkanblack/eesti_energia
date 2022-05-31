@@ -140,6 +140,16 @@ input[type="number"] {
             width: 100%;
             padding: 20px 0px 60px 0px;
         }
+        input[type="number"] {
+            width: auto;
+            height: auto;
+            border: none;
+            padding: 0;
+            font-size: 18px;
+            outline: none;
+            color: $green;
+            font-weight: 600;
+        }
         &__value {
             position: absolute;
             bottom: 15px;
