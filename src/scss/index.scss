@@ -327,10 +327,12 @@ input[type="number"] {
             grid-template-columns: repeat( auto-fill, minmax(calc(min(35%, 100%)), 1fr));
         }
         &-inputs {
-            select,
-            input {
-                height: 49px;
-                padding: 15px 10px;
+            .input-item {
+                select,
+                input {
+                    height: 49px;
+                    padding: 15px 10px;
+                }
             }
         }
     }
