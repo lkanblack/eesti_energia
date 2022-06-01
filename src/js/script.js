@@ -244,6 +244,8 @@ async function getResponse() {
               }
             });
           }
+        } else {
+          location.reload(true);
         }
       });
     }
