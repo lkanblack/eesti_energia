@@ -86,7 +86,6 @@ async function getResponse() {
                   } else if (
                     slider_value.value < content[volume][key].price_range[0]
                   ) {
-                    console.log("dsada");
                     manualSum = content[volume][key].price_range[0];
                     slider_value.value = manualSum;
                   } else {
