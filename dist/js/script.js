@@ -83,6 +83,12 @@ async function getResponse() {
                   ) {
                     manualSum = content[volume][key].price_range[1];
                     slider_value.value = manualSum;
+                  } else if (
+                    slider_value.value < content[volume][key].price_range[0]
+                  ) {
+                    console.log("dsada");
+                    manualSum = content[volume][key].price_range[0];
+                    slider_value.value = manualSum;
                   } else {
                     slider.value = manualSum;
                   }
@@ -183,10 +189,10 @@ async function getResponse() {
 
             function valueFunc() {
               instalment_sum = Number(instalment.value);
-              if (instalment_sum > slider.value) {
+              if (instalment_sum >= slider.value) {
                 instalment_sum = 0;
-                instalment.style.borderBottom = "3px solid #e03416";
                 instalment.value = 0;
+                instalment.style.borderBottom = "3px solid #e03416";
               } else {
                 instalment.style.borderBottom = "3px solid #99a0a6";
               }
