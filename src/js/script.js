@@ -18,6 +18,8 @@ let btn = document.querySelector(".calculator__btn");
 let btn_close = document.querySelector(".close");
 let popup = document.querySelector(".popup");
 
+let runningValue = document.querySelector(".js-value");
+
 async function getResponse() {
   let response = await fetch("data.json");
   let content = await response.json();
@@ -201,8 +203,16 @@ async function getResponse() {
             });
 
             slider.addEventListener("input", function () {
+              let value = slider.value;
+              runningValue.innerHTML = slider.value;
+              runningValue.style.left = value / 255 + "%";
+              runningValue.style.display = "block";
               manualSum = slider.value;
               sliderFunc();
+            });
+
+            slider.addEventListener("mouseup", function () {
+              runningValue.style.display = "none";
             });
 
             instalment.addEventListener("focusout", function () {
