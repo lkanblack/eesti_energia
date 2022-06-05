@@ -96,7 +96,7 @@ async function getResponse() {
                 let low = range.split("-")[0];
                 let high = range.split("-")[1];
 
-                if (num > low && num < high) {
+                if (num >= low && num <= high) {
                   intres_value.innerHTML = content[volume][key].intres[range];
                   contract_value.innerHTML =
                     content[volume][key].contract_fee[i - 1] + " €";
