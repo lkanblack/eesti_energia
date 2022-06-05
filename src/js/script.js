@@ -123,26 +123,51 @@ async function getResponse() {
                     }
                   }
 
+                  let interest_rate = Number(
+                    content[volume][key].intres[range].split("%")[0]
+                  );
+
+                  let price = Number(slider.value);
+                  let years = 0;
+                  if (period == 0) {
+                    years = content[volume][key].default_period / 12;
+                  } else {
+                    years = period / 12;
+                  }
                   let monthlyIntressedPay;
+
+                  function monthlyInt(price, pay, percent, years) {
+                    var i = parseFloat(percent / 100 / 12);
+                    var n = parseFloat(years * 12);
+                    var r =
+                      (price - pay) *
+                      ((i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1));
+                    monthlyIntressedPay = Number(r.toFixed(2));
+                  }
+
+                  monthlyInt(price, instalment_sum, interest_rate, years);
+
+                  console.log(monthlyIntressedPay);
+
                   let monhlyContractPay;
                   let totalPayment;
-                  if (period == 0) {
-                    monthlyIntressedPay =
-                      ((Number(slider.value) *
-                        content[volume][key].intres[range].split("%")[0]) /
-                        100 +
-                        Number(slider.value) -
-                        instalment_sum) /
-                      content[volume][key].default_period;
-                  } else {
-                    monthlyIntressedPay =
-                      ((Number(slider.value) *
-                        content[volume][key].intres[range].split("%")[0]) /
-                        100 +
-                        Number(slider.value) -
-                        instalment_sum) /
-                      period;
-                  }
+                  // if (period == 0) {
+                  //   monthlyIntressedPay =
+                  //     ((Number(slider.value) *
+                  //       content[volume][key].intres[range].split("%")[0]) /
+                  //       100 +
+                  //       Number(slider.value) -
+                  //       instalment_sum) /
+                  //     content[volume][key].default_period;
+                  // } else {
+                  //   monthlyIntressedPay =
+                  //     ((Number(slider.value) *
+                  //       content[volume][key].intres[range].split("%")[0]) /
+                  //       100 +
+                  //       Number(slider.value) -
+                  //       instalment_sum) /
+                  //     period;
+                  // }
 
                   if (period == 0) {
                     monhlyContractPay =
