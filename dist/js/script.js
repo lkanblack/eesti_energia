@@ -147,8 +147,6 @@ async function getResponse() {
 
                   monthlyInt(price, instalment_sum, interest_rate, years);
 
-                  console.log(monthlyIntressedPay);
-
                   let monhlyContractPay;
                   let totalPayment;
                   // if (period == 0) {
@@ -211,6 +209,10 @@ async function getResponse() {
 
             period_select.value = content[volume][key].default_period + " kuud";
 
+            function manualFunc() {
+              manualSum = slider_value.value;
+            }
+
             function valueFunc() {
               instalment_sum = Number(instalment.value);
               if (instalment_sum >= slider.value) {
@@ -220,10 +222,6 @@ async function getResponse() {
               } else {
                 instalment.style.borderBottom = "3px solid #99a0a6";
               }
-            }
-
-            function manualFunc() {
-              manualSum = slider_value.value;
             }
 
             period_select.addEventListener("input", function () {
@@ -246,7 +244,7 @@ async function getResponse() {
             });
 
             instalment.addEventListener("focusout", function () {
-              valuefunc();
+              valueFunc();
               sliderFunc();
             });
             instalment.addEventListener("keypress", function (e) {
